@@ -9,10 +9,11 @@ async function bootstrap() {
     .setTitle('Ecommerce API')
     .setDescription('The Ecommerce API description')
     .setVersion('1.0')
+    .addTag('ecommerce')
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);  
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, documentFactory);
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
