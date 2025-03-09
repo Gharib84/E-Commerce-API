@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: root  # Consider using Docker secrets or environment files for sensitive data
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    restart: always
+    container_name: postgres
+    volumes:
+      - ./data:/var/lib/postgresql/data  # Ensure this directory exists and has the correct permissions
+    ports:
+      - 5432:5432
+    networks:
+      - postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: pgadmin
+    ports:
+      - 8081:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "eddie@localhost"
+      PGADMIN_DEFAULT_PASSWORD: "root"  # Consider using Docker secrets or environment files for sensitive data
+    depends_on:
+      - db
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin  # Ensure this directory exists and has the correct permissions
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
