@@ -24,4 +24,9 @@ export class Product {
         default: {}
     })
     space:Record<string, string>;
+
+    @Column('timestamp',{
+        default: () => 'CURRENT_TIMESTAMP'
+    })
+    created_at: Date;
 }
