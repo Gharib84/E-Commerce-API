@@ -12,6 +12,12 @@ export class ProductsService {
     private readonly productRepository: Repository<Product>  
   ){}
 
+  /**
+   * Create a new product in the database.
+   * @param createProductDto the data to be inserted in the database
+   * @returns the newly created product, or undefined if an error occurs
+   * @throws HttpException if the create operation fails
+   */
  async create(createProductDto: CreateProductDto): Promise<Product | undefined> {
     try {
       const product = this.productRepository.create(createProductDto);
