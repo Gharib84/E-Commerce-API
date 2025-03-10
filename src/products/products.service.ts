@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,HttpException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -11,8 +11,14 @@ export class ProductsService {
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>  
   ){}
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+
+ async create(createProductDto: CreateProductDto): Promise<Product | undefined> {
+    try {
+      const product = this.productRepository.create(createProductDto);
+      return await this.productRepository.save(product);
+    } catch (error) {
+      throw new HttpException(error.message, 400);
+    }
   }
 
   findAll() {
