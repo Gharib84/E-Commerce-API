@@ -4,8 +4,11 @@ export class Product {
     @PrimaryGeneratedColumn('uuid')
     id: number;
 
-    @Column()
+    @Column('text')
     name: string;
+
+    @Column('text')
+    description: string;
 
     @Column()
     price: number;
