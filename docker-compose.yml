@@ -15,13 +15,13 @@ services:
       - postgres
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     restart: always
     container_name: pgadmin
     ports:
       - 8081:80
     environment:
-      PGADMIN_DEFAULT_EMAIL: "eddie@localhost"
+      PGADMIN_DEFAULT_EMAIL: "admin@example.com"  # Use a valid email address
       PGADMIN_DEFAULT_PASSWORD: "root"  # Consider using Docker secrets or environment files for sensitive data
     depends_on:
       - db
