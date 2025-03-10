@@ -14,4 +14,14 @@ export class Product {
         default: 0
     })
     price: number;
+
+    @Column('text',{
+        default: 'no-image.png'
+    })
+    image: string;
+    
+    @Column('simple-json', {
+        default: {}
+    })
+    space:Record<string, string>;
 }
