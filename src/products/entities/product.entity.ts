@@ -10,6 +10,8 @@ export class Product {
     @Column('text')
     description: string;
 
-    @Column()
+    @Column('decimal', {
+        default: 0
+    })
     price: number;
 }
