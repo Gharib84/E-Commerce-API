@@ -1,4 +1,4 @@
-import { IsDecimal,IsObject,IsString,IsUrl,Length,Validate,validate } from 'class-validator';
+import { IsDecimal, IsObject, IsString, IsUrl, Length, Validate, validate } from 'class-validator';
 import { ProductSpecs } from '../product-specs/product-specs';
 export class CreateProductDto {
     @IsString({
@@ -10,7 +10,7 @@ export class CreateProductDto {
     name: string;
 
     @IsString({
-         message: 'Description should be a string'   
+        message: 'Description should be a string'
     })
     @Length(5, 255, {
         message: 'Description should be between 5 and 255 characters'
@@ -18,7 +18,24 @@ export class CreateProductDto {
     @Validate(ProductSpecs)
     description: string;
 
-
+    @IsDecimal(
+        {
+            decimal_digits: '2',
+        }
+    )
     price: number;
+
+
+    @IsObject({
+        message: 'Product specs should be an object'
+    })
+    specs: Record<string, string>;
+
+    @IsUrl({
+        'require_protocol': true
+    },
+        {
+            'message': 'Image should be a valid url'
+        })
     image: string;
 }

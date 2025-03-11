@@ -15,15 +15,15 @@ export class Product {
     })
     price: number;
 
-    @Column('text',{
-        default: 'no-image.png'
-    })
-    image: string;
-    
     @Column('simple-json', {
         default: {}
     })
     space:Record<string, string>;
+
+    @Column('text',{
+        default: 'no-image.png'
+    })
+    image: string;
 
     @Column('timestamp',{
         default: () => 'CURRENT_TIMESTAMP'
