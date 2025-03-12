@@ -31,8 +31,18 @@ export class ProductsService {
     return await this.productRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  /**
+   * Finds a product by id.
+   * @param id the id of the product
+   * @returns the product if found, or undefined if not found
+   * @throws HttpException if the product is not found
+   */
+   async findOne(id: number): Promise<Product> {
+    const product = await this.productRepository.findOneBy({ id });
+    if (!product) {
+      throw new HttpException('Product not found', 404);
+    }
+    return product;
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
