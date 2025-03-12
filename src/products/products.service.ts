@@ -33,11 +33,15 @@ export class ProductsService {
    * @param limit the number of products to retrieve (defaults to 10)
    * @returns a list of products, or an empty list if no products are found
    */
-  async findAll(page: number = 1, limit: number = 10): Promise<Product[]> {
+  async getProducts(page: number = 1, limit: number = 10): Promise<Product[]> {
     return await this.productRepository.find({
       skip: (page - 1) * limit,
       take: limit
     });
+  }
+
+  async findAll(): Promise<Product[]> {
+    return await this.productRepository.find();
   }
 
   /**
@@ -47,7 +51,7 @@ export class ProductsService {
    * @throws HttpException if the product is not found
    */
    async findOne(id: string): Promise<Product> {
-    const product = await this.productRepository.findOneBy({ id });
+    const product = await this.productRepository.findOne({ where: { id } });
     if (!product) {
       throw new HttpException('Product not found', 404);
     }
