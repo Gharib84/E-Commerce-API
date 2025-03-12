@@ -33,4 +33,13 @@ export class Order {
         default: 0
     })
     totalPrice: number;
+
+    @ApiProperty({
+        description: 'Order creation date',
+    })
+    @Column( {
+        type: 'timestamp',
+        default: () => 'CURRENT_TIMESTAMP',
+    })
+    createdAt: Date;
 }
