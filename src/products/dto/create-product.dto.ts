@@ -20,7 +20,7 @@ export class CreateProductDto {
     @IsString({
         message: 'Description should be a string'
     })
-    @Length(5, 255, {
+    @Length(25, 255, {
         message: 'Description should be between 5 and 255 characters'
     })
     @Validate(ProductDescription)
