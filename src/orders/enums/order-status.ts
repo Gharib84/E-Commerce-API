@@ -1,3 +1,6 @@
+/**
+ * Order status
+ */
 export enum OrderStatus {
     PENDING = 'PANDING',
     APPROVED = 'APPROVED',
