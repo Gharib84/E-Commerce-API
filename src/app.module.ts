@@ -22,6 +22,11 @@ import { ProductsModule } from './products/products.module';
         database: configService.get<string>('POSTGRES_DB'),
         autoLoadEntities: true,
         synchronize: true,
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        migrations: [__dirname + '/migrations/*{.ts,.js}'],
+        cli: {
+          migrationsDir: 'src/migrations',
+        }
       }),
     }),
     ProductsModule,
