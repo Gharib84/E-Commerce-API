@@ -27,8 +27,11 @@ export class ProductsService {
     }
   }
 
-  async findAll(): Promise<Product[]> {
-    return await this.productRepository.find();
+  async findAll(page: number = 1, limit: number = 10): Promise<Product[]> {
+    return await this.productRepository.find({
+      skip: (page - 1) * limit,
+      take: limit
+    });
   }
 
   /**
@@ -51,5 +54,5 @@ export class ProductsService {
 
   remove(id: number) {
     return `This action removes a #${id} product`;
-  }
+  } 
 }
