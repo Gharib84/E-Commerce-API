@@ -27,6 +27,12 @@ export class ProductsService {
     }
   }
 
+  /**
+   * Retrieves a list of products from the database.
+   * @param page the page of products to retrieve (defaults to 1)
+   * @param limit the number of products to retrieve (defaults to 10)
+   * @returns a list of products, or an empty list if no products are found
+   */
   async findAll(page: number = 1, limit: number = 10): Promise<Product[]> {
     return await this.productRepository.find({
       skip: (page - 1) * limit,
@@ -40,7 +46,7 @@ export class ProductsService {
    * @returns the product if found, or undefined if not found
    * @throws HttpException if the product is not found
    */
-   async findOne(id: number): Promise<Product> {
+   async findOne(id: string): Promise<Product> {
     const product = await this.productRepository.findOneBy({ id });
     if (!product) {
       throw new HttpException('Product not found', 404);
