@@ -5,15 +5,14 @@ import * as dotenv from 'dotenv';
 @ValidatorConstraint({ name: 'ProductDescription', async: true })
 export class ProductDescription implements ValidatorConstraintInterface {
     message: string = '';
-
     /**
-     * Validates the given product description by checking its content for user comprehensibility,
-     * non-offensive language, and clarity. Utilizes the Google Generative AI service to analyze the description.
-     * 
+     * Validates the provided product description using the Google Generative AI service.
+     * Ensures the description is user-friendly, non-offensive, and clear.
+     *
      * @param description - The product description to be validated.
-     * @returns A promise that resolves to a boolean indicating whether the description is valid.
-     *          If invalid, sets the message property with the reason provided by the AI model.
-     * @throws An error if the API key for the Google Generative AI is not available.
+     * @returns A promise that resolves to a boolean indicating the validity of the description.
+     *          Sets the `message` property with feedback from the AI model if the description is invalid.
+     * @throws An error if the API key for the Google Generative AI is unavailable.
      */
 
     async validate(description: string) {
