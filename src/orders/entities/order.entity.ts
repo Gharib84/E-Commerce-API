@@ -36,9 +36,13 @@ export class Order {
     })
     totalPrice: number;
 
+    @ApiProperty({
+        description: 'Order product',
+        type: () => Product
+    })
     @ManyToOne(() => Product, product => product.orders)
     product: Product;
-    
+
     @ApiProperty({
         description: 'Order creation date',
     })
