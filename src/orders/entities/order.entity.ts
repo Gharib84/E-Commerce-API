@@ -1,6 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn,ManyToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { OrderStatus } from '../enums/order-status';
+import { Product } from 'src/products/entities/product.entity';
+
 @Entity('orders')
 export class Order {
     @PrimaryGeneratedColumn({
@@ -34,6 +36,9 @@ export class Order {
     })
     totalPrice: number;
 
+    @ManyToOne(() => Product, product => product.orders)
+    product: Product;
+    
     @ApiProperty({
         description: 'Order creation date',
     })
