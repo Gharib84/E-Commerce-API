@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn,ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn,ManyToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { OrderStatus } from '../enums/order-status';
 import { Product } from 'src/products/entities/product.entity';
@@ -41,6 +41,7 @@ export class Order {
         type: () => Product
     })
     @ManyToOne(() => Product, product => product.orders)
+    @JoinColumn({ name: 'product_id' })
     product: Product;
 
     @ApiProperty({
