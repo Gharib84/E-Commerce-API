@@ -53,4 +53,24 @@ export class OrdersService {
   remove(id: number) {
     return `This action removes a #${id} order`;
   }
+
+  async getOrders(page:number = 1,limit:number = 10){
+    try {
+      const orders = await this.orderRepository.find({
+        skip:(page-1)*limit,
+        take:limit,
+        relations:['product'],
+        select:{
+          product:{
+            name:true,
+            price:true,
+            image : true
+          }
+        }
+      });
+      return {orders};
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
