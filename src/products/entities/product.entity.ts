@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, JoinTable } from "typeorm";
 import { Order } from "src/orders/entities/order.entity";
 import { ApiProperty } from "@nestjs/swagger";
 @Entity('products')
