@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
 import { Product } from 'src/products/entities/product.entity';
+import { PaginationService } from 'src/common/pagination.service';
 @Injectable()
 export class OrdersService {
   constructor(
@@ -91,7 +92,7 @@ export class OrdersService {
       if(!order){
         throw new NotFoundException('`Order with id ${id} not found`');
       }
-      
+
       return order;
       
     } catch (error) {
