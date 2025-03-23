@@ -56,6 +56,13 @@ export class OrdersService {
     return `This action removes a #${id} order`;
   }
 
+  /**
+   * Retrieves a list of orders in a paginated manner.
+   * @param page the page of orders to retrieve (starts at 1)
+   * @param limit the number of orders to retrieve (defaults to 10)
+   * @returns a list of orders along with pagination data
+   * @throws HttpException if the retrieval operation fails
+   */
   async getOrders(page:number = 1,limit:number = 10){
     try {
       const orders = await this.orderRepository.find({
@@ -70,7 +77,11 @@ export class OrdersService {
           }
         }
       });
-      return {orders};
+
+      const totalItems = await this.orderRepository.count();
+      const pagination = this.paginationService.getPagination(page,limit,totalItems);
+      return {orders,pagination};
+      
     } catch (error) {
       throw new Error(error.message);
     }
