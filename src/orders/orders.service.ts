@@ -73,4 +73,20 @@ export class OrdersService {
       throw new Error(error.message);
     }
   }
+
+  async getOrderById(id:number):Promise<Order | null> {
+    try {
+      const order = await this.orderRepository.findOne({
+        where:{id},
+        relations:['product'],
+      })
+
+      return order
+      
+    } catch (error) {
+      throw new Error(error.message);
+    }
+
+    return null
+  }
 }
