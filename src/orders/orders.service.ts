@@ -12,7 +12,8 @@ export class OrdersService {
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
     @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>
+    private readonly productRepository: Repository<Product>,
+    private readonly paginationService:PaginationService
   ){}
   async create(createOrderDto: CreateOrderDto):Promise<Order | null> {
     try {
