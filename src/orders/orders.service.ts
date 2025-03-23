@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,NotFoundException } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -74,19 +74,28 @@ export class OrdersService {
     }
   }
 
-  async getOrderById(id:number):Promise<Order | null> {
+/**
+ * Retrieves an order by its ID.
+ * @param id - The ID of the order to retrieve.
+ * @returns The order with its related product details if found, or null if not found.
+ * @throws Error if there is an issue retrieving the order.
+ */
+
+  async getOrderById(id:number):Promise<Order> {
     try {
       const order = await this.orderRepository.findOne({
         where:{id},
         relations:['product'],
       })
 
-      return order
+      if(!order){
+        throw new NotFoundException('`Order with id ${id} not found`');
+      }
+      
+      return order;
       
     } catch (error) {
       throw new Error(error.message);
     }
-
-    return null
   }
 }
