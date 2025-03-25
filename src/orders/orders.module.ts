@@ -6,9 +6,10 @@ import { Order } from './entities/order.entity';
 import { Product } from 'src/products/entities/product.entity';
 import { PaginationService } from 'src/common/pagination.service';
 import { CommonModule } from 'src/common/common.module';
+import { User } from 'src/users/entities/user.entity';
 @Module({
   controllers: [OrdersController],
   providers: [OrdersService,PaginationService],
-  imports:[TypeOrmModule.forFeature([Order,Product]),CommonModule]
+  imports:[TypeOrmModule.forFeature([Order,Product,User]),CommonModule]
 })
 export class OrdersModule {}
