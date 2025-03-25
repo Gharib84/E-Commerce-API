@@ -46,4 +46,22 @@ export class UsersService {
   remove(id: number) {
     return `This action removes a #${id} user`;
   }
+
+  /**
+   * Finds a user by id.
+   * @param id the id of the user
+   * @returns the user if found, or undefined if not found
+   * @throws Error if the user is not found
+   */
+  async getUserById(id: string): Promise<User> {
+    try {
+      const user = await this.userRepository.findOne({ where: { id }, relations: ['orders'] });
+      if (!user) {
+        throw new Error('User not found');
+      }
+      return user;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
