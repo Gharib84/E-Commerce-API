@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn,ManyToOne, JoinColumn } from 'ty
 import { ApiProperty } from '@nestjs/swagger';
 import { OrderStatus } from '../enums/order-status';
 import { Product } from 'src/products/entities/product.entity';
-
+import { User } from 'src/users/entities/user.entity';
 @Entity('orders')
 export class Order {
     @PrimaryGeneratedColumn({
@@ -43,6 +43,14 @@ export class Order {
     @ManyToOne(() => Product, product => product.orders)
     @JoinColumn({ name: 'product_id' })
     product: Product;
+
+    @ApiProperty({
+        description: 'Order customer',
+        type: () => User
+    })
+    @ManyToOne(() => User, user => user.orders)
+    @JoinColumn({ name: 'user_id' })
+    customer: User;
 
     @ApiProperty({
         description: 'Order creation date',
