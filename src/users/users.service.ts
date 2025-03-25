@@ -14,8 +14,21 @@ export class UsersService {
     @InjectRepository(Order) private readonly orderRepository: Repository<Order>
   ){}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  /**
+   * Create a new user in the database.
+   * @param createUserDto the data to be inserted in the database
+   * @returns the newly created user, or undefined if an error occurs
+   * @throws Error if the create operation fails
+   */
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    try {
+      const user = this.userRepository.create(createUserDto);
+      await this.userRepository.save(user);
+      
+      return user;
+    } catch (error) {
+      throw new Error(error.message);
+    }
   }
 
   findAll() {
