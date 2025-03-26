@@ -10,11 +10,16 @@ export class AuthController {
 
     @Post('login')
     login(@Body() login: LoginUserDto) {
-        const { username, password } = login;
-        return this.authService.login(username, password);
+        return this.authService.login(login);
     }
 
     @Post('register')
+    /**
+     * Registers a new user in the database.
+     * @param user the user data to store.
+     * @returns a newly created user.
+     * @throws Error if the registration fails.
+     */
     register(@Body() user: CreateUserDto) {
         return this.authService.register(user);
     }

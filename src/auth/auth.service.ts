@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 import * as bcrypt from 'bcrypt-ts';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,40 +32,36 @@ export class AuthService {
      * access token if the login was successful. If the login fails, an
      * object with an error message is returned.
      */
-    async login(username: string, password: string) {
+    async login(login: LoginUserDto) {
+        const { username, password } = login;
         try {
-            const user = await this.usersService.getUserByUsername(username);
-            if (user && (await this.varifyPassword(user, password, user.password))) {
-                delete (user as { password?: string }).password;
-                const accessToken = await this.jwtService.signAsync({
-                    sub: user.id,
-                    username: user.username
-                });
-
-                return {
-                    message: 'Login successful',
-                    data: {
-                        ...user,
-                        accessToken
-
-                    }
-                }
-            }
-
-            return {
-                message: 'Login failed',
-                data: null,
-                error: {
-                    message: 'Invalid username or password'
-                }
-            }
-
-        } catch (error) {
-            throw new Error(error.message); 
-
-        }
-    }
+          const user = await this.usersService.getUserByUsername(username);
     
+          if (user && await this.varifyPassword(user, password, user.password)) {
+           //delete user?.password;
+            const accessToken = await this.jwtService.signAsync({
+              sub: user.id,
+              username: user.username,
+            });
+    
+            return {
+              message: 'Login successful',
+              data: {
+                ...user,
+                accessToken,
+              },
+            };
+          }
+    
+          return {
+            message: 'Invalid username or password',
+            data: null,
+          };
+        } catch (error) {
+          return error;
+        }
+      }
+
     /**
      * Hashes a given password using bcrypt with a cost of 10.
      * @param password The password to hash.
