@@ -83,14 +83,13 @@ export class AuthService {
     async register(user: CreateUserDto) {
         try {
             const hashedPassword = this.hashPassword(user.password);
-            user.password = hashedPassword;
             const newUser: CreateUserDto = {
                 ...user,
                 password: hashedPassword
             };
 
             return await this.usersService.create(newUser);
-            
+
         } catch (error) {
             throw new Error(error.message);
         }
