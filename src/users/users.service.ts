@@ -55,13 +55,16 @@ export class UsersService {
    * @returns the user if found, or undefined if not found
    * @throws Error if the user is not found
    */
-  async getUserByUsername(username: string): Promise<User> {
+  async getUserByUsername(username: string): Promise<User | null> {
     try {
       const user = await this.userRepository.findOne({ where: { username }, relations: ['orders'] });
+
       if (!user) {
         throw new Error('User not found');
       }
+
       return user;
+      
     } catch (error) {
       throw new Error(error.message);
     }
