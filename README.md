@@ -1,98 +1,115 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# E-Commerce-API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+E-Commerce-API is a robust and scalable RESTful API designed to power modern e-commerce platforms. Built with NestJS (TypeScript), TypeORM, and PostgreSQL, this API provides essential functionalities for managing products, users, orders, and payments, making it a perfect backend solution for e-commerce applications.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+*   **Product Management:**
+    *   Create, read, update, and delete products.
+    *   Detailed product descriptions with validation using Google's Gemini AI.
+    *   Structured product specifications.
+    *   Image URLs for products.
+*   **User Management:**
+    *   User registration and login.
+    *   Secure password handling.
+    *   User authentication via JWT.
+    * Get users by id or username
+*   **Order Management:**
+    *   Create, read, update, and delete orders.
+    *   Order status tracking.
+    *   Relationship between users, orders, and products.
+*   **Authentication and Authorization:**
+    *   JWT-based authentication to secure API endpoints.
+    *   `AuthGuard` for route protection.
+*   **Database:**
+    *   PostgreSQL database for reliable data storage.
+    *   TypeORM for object-relational mapping.
+*   **API Documentation:**
+    *   Swagger integration for interactive API documentation.
+*   **Validation:**
+    *   Class-validator for data validation using decorators.
+    *   Custom validator constraints (`ProductDescription`, `ProductSpecs`).
+*   **Error Handling:**
+    *   `HttpExceptionFilter` for standardized error responses.
+*   **Pagination:**
+    *   `PaginationService` for paginated responses.
+*   **Environment Variables:**
+    *   `.env.example.local` file for managing environment variables.
+*   **Docker Support:**
+    *   `docker-compose.yml` for easy setup with PostgreSQL and pgAdmin.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Technologies Used
 
-## Project setup
+*   **NestJS:** A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
+*   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
+*   **TypeORM:** An ORM that can run in Node.js, allowing you to work with databases using TypeScript.
+*   **PostgreSQL:** A powerful, open-source relational database system.
+*   **JWT (JSON Web Tokens):** An open standard for creating data with optional signature and/or optional encryption whose payload holds JSON.
+*   **Swagger:** An open-source software design tool suite for building and documenting RESTful APIs.
+*   **Docker:** A platform for developing, shipping, and running applications inside containers.
+*   **Google Gemini AI:** A Generative AI model for validating product descriptions.
+*   **Class-validator:** A library that allows you to use decorator and non-decorator-based validation on your classes and plain objects.
 
-```bash
-$ npm install
-```
+## Getting Started
 
-## Compile and run the project
+### Prerequisites
 
-```bash
-# development
-$ npm run start
+*   Node.js (v18 or higher recommended)
+*   npm or yarn
+*   Docker and Docker Compose (recommended for local setup)
 
-# watch mode
-$ npm run start:dev
+### Installation
 
-# production mode
-$ npm run start:prod
-```
+1.  **Clone the repository:**
 
-## Run tests
+    ```bash
+    git clone https://github.com/Gharib84/E-Commerce-API.git
+    cd ecommerce-api
+    ```
 
-```bash
-# unit tests
-$ npm run test
+2.  **Install dependencies:**
 
-# e2e tests
-$ npm run test:e2e
+    ```bash
+    npm install # or yarn install
+    ```
 
-# test coverage
-$ npm run test:cov
-```
+3.  **Environment Variables:**
 
-## Deployment
+    *   Copy `.env.example.local` to `.env.local`:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+        ```bash
+        cp .env.example.local .env.local
+        ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+    *   Fill in the `.env.local` file with your PostgreSQL credentials, Gemini API key, and JWT secret.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+        ```
+        POSTGRES_HOST=localhost
+        POSTGRES_PORT=5432
+        POSTGRES_USER=your_postgres_user
+        POSTGRES_PASSWORD=your_postgres_password
+        POSTGRES_DB=your_postgres_database
+        GEMINI_API_KEY=your_gemini_api_key
+        JWT_SECRET=your_jwt_secret
+        ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Running the Application
 
-## Resources
+#### Using Docker (Recommended)
 
-Check out a few resources that may come in handy when working with NestJS:
+1.  **Start the Docker containers:**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+    ```bash
+    docker-compose up -d
+    ```
 
-## Support
+    This will start the PostgreSQL database, pgAdmin (for database management), and the NestJS application in separate containers.
+    pgAdmin will be avalaible on `http://localhost:8081`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+2.  **Wait for the Database:**
 
-## Stay in touch
+    Wait for the PostgreSQL database to be fully initialized. This may take a few moments.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+3.  **Access the API:**
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+    The API will be available at `http://localhost:3000/api`.
