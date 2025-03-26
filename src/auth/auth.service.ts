@@ -23,6 +23,14 @@ export class AuthService {
         return user && (await bcrypt.compare(password, hashedPassword));
     }
 
+    /**
+     * Logs in a user using the given username and password.
+     * @param username The username to log in with.
+     * @param password The password to log in with.
+     * @returns an object with a success message, the user data, and an
+     * access token if the login was successful. If the login fails, an
+     * object with an error message is returned.
+     */
     async login(username: string, password: string) {
         try {
             const user = await this.usersService.getUserByUsername(username);
@@ -54,6 +62,37 @@ export class AuthService {
         } catch (error) {
             throw new Error(error.message); 
 
+        }
+    }
+    
+    /**
+     * Hashes a given password using bcrypt with a cost of 10.
+     * @param password The password to hash.
+     * @returns The hashed password.
+     */
+    hashPassword(password: string) {
+        return bcrypt.hashSync(password, 10);
+    }
+
+    /**
+     * Registers a new user with the given details.
+     * @param user The details of the user to register.
+     * @returns A message indicating success or failure, and the newly created user if success.
+     * @throws Error if the registration fails.
+     */
+    async register(user: CreateUserDto) {
+        try {
+            const hashedPassword = this.hashPassword(user.password);
+            user.password = hashedPassword;
+            const newUser: CreateUserDto = {
+                ...user,
+                password: hashedPassword
+            };
+
+            return await this.usersService.create(newUser);
+            
+        } catch (error) {
+            throw new Error(error.message);
         }
     }
 }
