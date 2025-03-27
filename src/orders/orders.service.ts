@@ -46,8 +46,19 @@ export class OrdersService {
     })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  /**
+   * Finds an order by its ID.
+   * @param id - The ID of the order to find.
+   * @returns The order with its related product details if found.
+   * @throws Error if the order is not found.
+   */
+
+  async findOne(id: number): Promise<Order> {
+    const order = await this.orderRepository.findOne({ where: { id },relations:['product'] });
+    if (!order) {
+      throw new Error('Order not found');
+    }
+    return order;
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {
