@@ -58,8 +58,20 @@ export class ProductsService {
     return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: string, updateProductDto: UpdateProductDto): Promise<Product> {
+    try {
+      const product = await this.productRepository.findOneBy({ id });
+      if (!product) {
+        throw new Error('Product not found'); 
+    }
+
+    Object.assign(product, updateProductDto);
+
+    return await this.productRepository.save(product);
+
+    } catch (error) {
+      throw new HttpException(error.message, 400);
+    }
   }
 
   remove(id: number) {
