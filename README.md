@@ -1,115 +1,113 @@
-# E-Commerce-API
+# E-Commerce API
 
-E-Commerce-API is a robust and scalable RESTful API designed to power modern e-commerce platforms. Built with NestJS (TypeScript), TypeORM, and PostgreSQL, this API provides essential functionalities for managing products, users, orders, and payments, making it a perfect backend solution for e-commerce applications.
+## Overview
 
-## Features
+E-Commerce-API is a robust and scalable RESTful API designed to power modern e-commerce platforms. Built with cutting-edge technologies, this backend solution provides comprehensive functionalities for managing products, users, orders, and payments.
 
-*   **Product Management:**
-    *   Create, read, update, and delete products.
-    *   Detailed product descriptions with validation using Google's Gemini AI.
-    *   Structured product specifications.
-    *   Image URLs for products.
-*   **User Management:**
-    *   User registration and login.
-    *   Secure password handling.
-    *   User authentication via JWT.
-    * Get users by id or username
-*   **Order Management:**
-    *   Create, read, update, and delete orders.
-    *   Order status tracking.
-    *   Relationship between users, orders, and products.
-*   **Authentication and Authorization:**
-    *   JWT-based authentication to secure API endpoints.
-    *   `AuthGuard` for route protection.
-*   **Database:**
-    *   PostgreSQL database for reliable data storage.
-    *   TypeORM for object-relational mapping.
-*   **API Documentation:**
-    *   Swagger integration for interactive API documentation.
-*   **Validation:**
-    *   Class-validator for data validation using decorators.
-    *   Custom validator constraints (`ProductDescription`, `ProductSpecs`).
-*   **Error Handling:**
-    *   `HttpExceptionFilter` for standardized error responses.
-*   **Pagination:**
-    *   `PaginationService` for paginated responses.
-*   **Environment Variables:**
-    *   `.env.example.local` file for managing environment variables.
-*   **Docker Support:**
-    *   `docker-compose.yml` for easy setup with PostgreSQL and pgAdmin.
+## Key Features
 
-## Technologies Used
+### Product Management
+- Create, read, update, and delete products
+- AI-powered product description validation using Google Gemini
+- Structured product specifications
+- Product image URL management
 
-*   **NestJS:** A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
-*   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript.
-*   **TypeORM:** An ORM that can run in Node.js, allowing you to work with databases using TypeScript.
-*   **PostgreSQL:** A powerful, open-source relational database system.
-*   **JWT (JSON Web Tokens):** An open standard for creating data with optional signature and/or optional encryption whose payload holds JSON.
-*   **Swagger:** An open-source software design tool suite for building and documenting RESTful APIs.
-*   **Docker:** A platform for developing, shipping, and running applications inside containers.
-*   **Google Gemini AI:** A Generative AI model for validating product descriptions.
-*   **Class-validator:** A library that allows you to use decorator and non-decorator-based validation on your classes and plain objects.
+### User Management
+- Secure user registration and authentication
+- JWT-based user authentication
+- User profile retrieval by ID or username
 
-## Getting Started
+### Order Management
+- Full CRUD operations for orders
+- Advanced order status tracking
+- Complex relationships between users, orders, and products
 
-### Prerequisites
+## Technologies Stack
 
-*   Node.js (v18 or higher recommended)
-*   npm or yarn
-*   Docker and Docker Compose (recommended for local setup)
+- **NestJS:** Powerful Node.js framework for scalable server-side applications
+- **TypeScript:** Typed superset of JavaScript
+- **TypeORM:** Object-Relational Mapping library
+- **PostgreSQL:** Reliable relational database
+- **Docker:** Containerization platform
+- **Google Gemini AI:** Advanced AI for product description validation
+- **Swagger:** Interactive API documentation
 
-### Installation
+## Advanced Features
 
-1.  **Clone the repository:**
+- **Authentication:** Secure JWT-based route protection
+- **Validation:** Comprehensive data validation with class-validator
+- **Error Handling:** Standardized error response mechanism
+- **Pagination:** Efficient data retrieval with pagination support
+- **Documentation:** Swagger-integrated interactive API docs
 
-    ```bash
-    git clone https://github.com/Gharib84/E-Commerce-API.git
-    cd ecommerce-api
-    ```
+## Prerequisites
 
-2.  **Install dependencies:**
+- Node.js (v20+)
+- npm or yarn
+- Docker & Docker Compose (recommended)
 
-    ```bash
-    npm install # or yarn install
-    ```
+## Quick Start
 
-3.  **Environment Variables:**
+### 1. Clone the Repository
 
-    *   Copy `.env.example.local` to `.env.local`:
+```bash
+git clone https://github.com/Gharib84/E-Commerce-API.git
+cd ecommerce-api
+```
 
-        ```bash
-        cp .env.example.local .env.local
-        ```
+### 2. Install Dependencies
 
-    *   Fill in the `.env.local` file with your PostgreSQL credentials, Gemini API key, and JWT secret.
+```bash
+npm install
+# or
+yarn install
+```
 
-        ```
-        POSTGRES_HOST=localhost
-        POSTGRES_PORT=5432
-        POSTGRES_USER=your_postgres_user
-        POSTGRES_PASSWORD=your_postgres_password
-        POSTGRES_DB=your_postgres_database
-        GEMINI_API_KEY=your_gemini_api_key
-        JWT_SECRET=your_jwt_secret
-        ```
+### 3. Configure Environment
 
-### Running the Application
+```bash
+# Copy environment template
+cp .env.example.local .env.local
 
-#### Using Docker (Recommended)
+# Fill in your credentials in .env.local
+# Update:
+# - PostgreSQL credentials
+# - Gemini API key
+# - JWT secret
+```
 
-1.  **Start the Docker containers:**
+### 4. Run with Docker (Recommended)
 
-    ```bash
-    docker-compose up -d
-    ```
+```bash
+# Start all services
+docker-compose up -d
 
-    This will start the PostgreSQL database, pgAdmin (for database management), and the NestJS application in separate containers.
-    pgAdmin will be avalaible on `http://localhost:8081`
+# Services:
+# - API: http://localhost:3000/api
+# - pgAdmin: http://localhost:8081
+```
 
-2.  **Wait for the Database:**
+## API Documentation
 
-    Wait for the PostgreSQL database to be fully initialized. This may take a few moments.
+Once the application is running, access the Swagger documentation at:
+`http://localhost:3000/api`
 
-3.  **Access the API:**
+## Contributing
 
-    The API will be available at `http://localhost:3000/api`.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+
+Project Link: [https://github.com/Gharib84/E-Commerce-API](https://github.com/Gharib84/E-Commerce-API)
+
+---
+
+**Tip:** Make sure to replace placeholders in `.env.local` with your actual credentials before running the application.
